@@ -69,6 +69,11 @@ public class PenjualanView extends javax.swing.JFrame {
         jLabel5.setText("Nama Pelanggan");
 
         btnCariPelanggan.setText("Cari");
+        btnCariPelanggan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariPelangganActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -302,6 +307,11 @@ public class PenjualanView extends javax.swing.JFrame {
        CariBarangView cbv = new CariBarangView();
        cbv.setVisible(true);
     }//GEN-LAST:event_btnCariBarangActionPerformed
+
+    private void btnCariPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariPelangganActionPerformed
+        CariPelangganView cpv = new CariPelangganView();
+        cpv.setVisible(true);
+    }//GEN-LAST:event_btnCariPelangganActionPerformed
 
     /**
      * @param args the command line arguments

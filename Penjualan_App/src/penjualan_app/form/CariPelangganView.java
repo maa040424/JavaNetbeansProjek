@@ -4,6 +4,15 @@
  */
 package penjualan_app.form;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import penjualan_app.setting.Koneksi;
+
 /**
  *
  * @author ASUS
@@ -15,7 +24,10 @@ public class CariPelangganView extends javax.swing.JFrame {
      */
     public CariPelangganView() {
         initComponents();
+        tampilData();
     }
+     Connection conn = Koneksi.getKoneksi();
+    PreparedStatement pst;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,10 +131,9 @@ public class CariPelangganView extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int row = jTable1.getSelectedRow();
-        PenjualanView.textIDBarang.setText (jTable1.getValueAt(row, 0).toString());
-        PenjualanView.textNamaBarang.setText (jTable1.getValueAt(row, 1).toString());
-        PenjualanView.textHarga.setText (jTable1.getValueAt(row, 3).toString());
-        PenjualanView.textStok.setText (jTable1.getValueAt(row, 4).toString());
+        PenjualanView.textIDPelanggan.setText (jTable1.getValueAt(row, 0).toString());
+        PenjualanView.textNamaPelanggan.setText (jTable1.getValueAt(row, 1).toString());
+       
         dispose();
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -169,4 +180,28 @@ public class CariPelangganView extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+
+     private void tampilData(){
+        try {
+            String[] judul = {"ID", "Nama Pelanggan", "No Hp", "Alamat"};
+            DefaultTableModel dtm = new DefaultTableModel(null, judul);
+            jTable1.setModel(dtm);
+            String sql = "select * from pelanggan";
+            if (!jTextField3.getText().isEmpty()){
+                sql = "select * from pelanggan where  nama_pelanggan" + "like '%" + jTextField3.getText() + "%'";
+            }        
+            pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()){
+                String[] data = {rs.getString(1),
+                    rs.getString(2), rs.getString(3), rs.getString(4)};
+                dtm.addRow(data);
+                
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PelangganView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
 }
