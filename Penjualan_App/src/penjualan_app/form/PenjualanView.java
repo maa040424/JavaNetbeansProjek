@@ -56,6 +56,7 @@ public class PenjualanView extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 153, 0));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Data Penjualan"));
 
@@ -63,17 +64,9 @@ public class PenjualanView extends javax.swing.JFrame {
 
         jLabel3.setText("Tanggal Penjualan");
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField2");
-
         jLabel4.setText("ID Pelanggan ");
 
         jLabel5.setText("Nama Pelanggan");
-
-        jTextField3.setText("jTextField3");
-
-        jTextField4.setText("jTextField4");
 
         jButtonCariIDNama.setText("Cari");
 
