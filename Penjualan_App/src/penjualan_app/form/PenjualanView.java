@@ -389,4 +389,21 @@ public class PenjualanView extends javax.swing.JFrame {
     public static javax.swing.JTextField textStok;
     private javax.swing.JTextField textTanggal;
     // End of variables declaration//GEN-END:variables
+
+    private void noPenjualanOtomatis() {
+        String sql = "select id from penjualan order by id desc limit 1 ";
+        pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        if(rs.next()){
+            int id = Integer.parseInt(rs.getString(1)) + 1;
+            textNoPenjualan.setText(Integer.toString(id));
+        }else{
+            textNoPenjualan.setText("1");
+        }
+        
+    }
+
+    private void bersih() {
+        
+    }
 }
