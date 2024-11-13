@@ -133,6 +133,12 @@ public class PenjualanView extends javax.swing.JFrame {
 
         jLabel8.setText("Harga Barang");
 
+        textIDBarang.setEditable(false);
+
+        textNamaBarang.setEditable(false);
+
+        textHarga.setEditable(false);
+
         btnCariBarang.setText("Cari");
         btnCariBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +149,8 @@ public class PenjualanView extends javax.swing.JFrame {
         jLabel9.setText("Stok Tersedia");
 
         jLabel10.setText("Jumlah Beli");
+
+        textStok.setEditable(false);
 
         btnTambah.setText("Tambah");
 
