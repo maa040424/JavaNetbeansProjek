@@ -63,6 +63,7 @@ public class PenjualanView extends javax.swing.JFrame {
         textStok = new javax.swing.JTextField();
         textQty = new javax.swing.JTextField();
         btnTambah = new javax.swing.JButton();
+        jButtonHapus = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelBarang = new javax.swing.JTable();
@@ -181,6 +182,13 @@ public class PenjualanView extends javax.swing.JFrame {
             }
         });
 
+        jButtonHapus.setText("Hapus");
+        jButtonHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHapusActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -205,11 +213,12 @@ public class PenjualanView extends javax.swing.JFrame {
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(textStok)
-                    .addComponent(textQty))
+                    .addComponent(textQty)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonHapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -232,7 +241,8 @@ public class PenjualanView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(textHarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTambah))
+                    .addComponent(btnTambah)
+                    .addComponent(jButtonHapus))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -364,6 +374,17 @@ public class PenjualanView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnTambahActionPerformed
 
+    private void jButtonHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHapusActionPerformed
+        int row = tabelBarang.getSelectedRow();
+        if(row < 0){
+            JOptionPane.showMessageDialog(null, "Data Barang yang mau dihapus belum di pilih");
+        }else{
+            dtm.removeRow(row);
+            tabelBarang.setModel(dtm);
+            hitung_subtotal();
+        }
+    }//GEN-LAST:event_jButtonHapusActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -405,6 +426,7 @@ public class PenjualanView extends javax.swing.JFrame {
     private javax.swing.JButton btnCariPelanggan;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTambah;
+    private javax.swing.JButton jButtonHapus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
