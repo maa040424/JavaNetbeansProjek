@@ -1,19 +1,26 @@
 
 package penjualan_app.form;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import penjualan_app.setting.Koneksi;
+
 /**
  *
  * @author ASUS
  */
 public class PenjualanView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form PenjualanView
-     */
+   
+    
     public PenjualanView() {
         initComponents();
+        noPenjualanOtomatis();
+        bersih();
     }
 
+    Connection conn = Koneksi.getKoneksi();
+    PreparedStatement pst;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
