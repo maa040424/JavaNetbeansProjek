@@ -135,7 +135,7 @@ public class CariBarangView extends javax.swing.JFrame {
         PenjualanView.textNamaBarang.setText (jTable1.getValueAt(row, 1).toString());
         PenjualanView.textHarga.setText (jTable1.getValueAt(row, 3).toString());
         PenjualanView.textStok.setText (jTable1.getValueAt(row, 4).toString());
-        
+        dispose();
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**

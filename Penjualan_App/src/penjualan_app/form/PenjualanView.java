@@ -134,6 +134,11 @@ public class PenjualanView extends javax.swing.JFrame {
         jLabel8.setText("Harga Barang");
 
         btnCariBarang.setText("Cari");
+        btnCariBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariBarangActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Stok Tersedia");
 
@@ -284,6 +289,11 @@ public class PenjualanView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCariBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariBarangActionPerformed
+       CariBarangView cbv = new CariBarangView();
+       cbv.setVisible(true);
+    }//GEN-LAST:event_btnCariBarangActionPerformed
 
     /**
      * @param args the command line arguments
