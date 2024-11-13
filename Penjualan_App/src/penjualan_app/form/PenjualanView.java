@@ -264,6 +264,11 @@ public class PenjualanView extends javax.swing.JFrame {
         labelTotal.setFont(new java.awt.Font("Bernard MT Condensed", 0, 14)); // NOI18N
 
         btnSimpan.setText("Simpan");
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
 
         btnBatal.setText("Batal");
 
@@ -384,6 +389,60 @@ public class PenjualanView extends javax.swing.JFrame {
             hitung_subtotal();
         }
     }//GEN-LAST:event_jButtonHapusActionPerformed
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        if(textIDPelanggan.getText().isEmpty()){
+        JOptionPane.showMessageDialog(null, "Data pelanggan belum dipilih!");
+    }else if(labelTotal.getText().equals("0")){
+        JOptionPane.showMessageDialog(null, "Belum ada data barang yang dipilih!");
+    }else{
+        try {
+            conn.setAutoCommit(false); //memulai proses transaksi
+            String querySimpanPenjualan = "insert into penjualan values (?, ?, ?, ?)";
+            pst = conn.prepareStatement(querySimpanPenjualan);
+            pst.setString(1, textNoPenjualan.getText());
+            pst.setString(2, textTanggal.getText());
+            pst.setString(3, textIDPelanggan.getText());
+            pst.setString(4, labelTotal.getText());
+            pst.executeUpdate();
+            
+            for(int a=0; a < tabelBarang.getRowCount(); a++){
+                //proses untuk memasukan data ke dalam tabel detail penjualan
+                String idBarang = tabelBarang.getValueAt(a, 0).toString(); //mengambil id barang yg ada di tabel barang
+                String harga = tabelBarang.getValueAt(a, 2).toString(); //mengambil harga barang yg ada di tabel barang
+                String qty = tabelBarang.getValueAt(a, 3).toString(); //mengambil jumlah beli yg ada di tabel barang
+                String querySimpanDetail = "insert into detail_penjualan values (null, ?, ?, ?, ?)";
+                pst = conn.prepareStatement(querySimpanDetail);
+                pst.setString(1, textNoPenjualan.getText());
+                pst.setString(2, idBarang);
+                pst.setString(3, harga);
+                pst.setString(4, qty);
+                pst.executeUpdate();
+                
+                //proses untuk mengubah stok
+                String queryUpdateStok = "update barang set stok=stok-? where id=?";
+                pst = conn.prepareStatement(queryUpdateStok);
+                pst.setString(1, qty);
+                pst.setString(2, idBarang);
+                pst.executeUpdate();
+            }
+            
+            conn.commit(); //jalankan semua proses simpan (jalankan 3 executeUpdate)
+            JOptionPane.showMessageDialog(null, "Data transaksi berhasil disimpan!!!", "Berhasil", 1);
+            dtm.setRowCount(0); 
+            bersih(); //jalankan method bersih()
+            noPenjualanOtomatis(); //jalankan method noPenjualanOtomatis
+        } catch (SQLException ex) {
+            try {
+                conn.rollback(); //batalkan semua proses simpan data apabila terjadi kesalahan
+                JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada simpan data dengan detail: " + ex.toString(), "Gagal", 2);
+                Logger.getLogger(PenjualanView.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(PenjualanView.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+    }
+    }//GEN-LAST:event_btnSimpanActionPerformed
 
     /**
      * @param args the command line arguments
