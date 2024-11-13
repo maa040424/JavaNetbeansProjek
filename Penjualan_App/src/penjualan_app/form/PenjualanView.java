@@ -1,13 +1,17 @@
 
 package penjualan_app.form;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import penjualan_app.setting.Koneksi;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,6 +29,7 @@ public class PenjualanView extends javax.swing.JFrame {
 
     Connection conn = Koneksi.getKoneksi();
     PreparedStatement pst;
+    DefaultTableModel dtm;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -170,6 +175,11 @@ public class PenjualanView extends javax.swing.JFrame {
         textStok.setEditable(false);
 
         btnTambah.setText("Tambah");
+        btnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -190,18 +200,16 @@ public class PenjualanView extends javax.swing.JFrame {
                     .addComponent(textHarga)
                     .addComponent(textNamaBarang))
                 .addGap(131, 131, 131)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(41, 41, 41)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textStok)
-                            .addComponent(textQty)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(textStok)
+                    .addComponent(textQty))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -235,16 +243,15 @@ public class PenjualanView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID Barang", "Nama Barang", "Harga Barang", "Qty", "Subtotal", "Aksi"
+                "ID Barang", "Nama Barang", "Harga Barang", "Qty", "Subtotal"
             }
         ));
         jScrollPane1.setViewportView(tabelBarang);
 
         jLabel11.setFont(new java.awt.Font("Bernard MT Condensed", 0, 14)); // NOI18N
-        jLabel11.setText("Total Transaksi :");
+        jLabel11.setText("Total Transaksi : Rp.");
 
         labelTotal.setFont(new java.awt.Font("Bernard MT Condensed", 0, 14)); // NOI18N
-        labelTotal.setText("Rp.");
 
         btnSimpan.setText("Simpan");
 
@@ -324,6 +331,38 @@ public class PenjualanView extends javax.swing.JFrame {
         CariPelangganView cpv = new CariPelangganView();
         cpv.setVisible(true);
     }//GEN-LAST:event_btnCariPelangganActionPerformed
+
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        if(textIDBarang.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Data Barang Belum Dipilih!!!");
+        }else if (textQty.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Jumlah beli belum di isi!!!");
+        }else{
+            int stok = Integer.parseInt(textStok.getText());
+            int qty = Integer.parseInt(textQty.getText());
+            if(qty > stok){
+                JOptionPane.showMessageDialog(null, "Stok Tidak Mencukupi!");
+            }else{
+                dtm = (DefaultTableModel)tabelBarang.getModel();
+                int harga = Integer.parseInt(textHarga.getText());
+                int subtotal = harga * qty;
+                ArrayList data = new ArrayList();
+                data.add(textIDBarang.getText());
+                data.add(textNamaBarang.getText());
+                data.add(textHarga.getText());
+                data.add(textQty.getText());
+                data.add(subtotal);
+                dtm.addRow(data.toArray());
+                hitung_subtotal();
+                textIDBarang.setText("");
+                textNamaBarang.setText("");
+                textHarga.setText("");
+                textStok.setText("");
+                textQty.setText("");
+            }
+        }
+        
+    }//GEN-LAST:event_btnTambahActionPerformed
 
     /**
      * @param args the command line arguments
@@ -423,5 +462,13 @@ public class PenjualanView extends javax.swing.JFrame {
        textQty.setText("");
        textTanggal.setText("");
        labelTotal.setText("Rp.0");
+    }
+
+    private void hitung_subtotal() {
+        BigDecimal total = new BigDecimal(0);
+        for(int a=0; a<tabelBarang.getRowCount(); a++){
+            total = total.add(new BigDecimal(tabelBarang.getValueAt(a, 4).toString()));
+        }
+        labelTotal.setText(total.toString());
     }
 }
