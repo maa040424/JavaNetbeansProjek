@@ -4,6 +4,10 @@ package penjualan_app.form;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import penjualan_app.setting.Koneksi;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -391,19 +395,33 @@ public class PenjualanView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void noPenjualanOtomatis() {
-        String sql = "select id from penjualan order by id desc limit 1 ";
-        pst = conn.prepareStatement(sql);
-        ResultSet rs = pst.executeQuery();
-        if(rs.next()){
-            int id = Integer.parseInt(rs.getString(1)) + 1;
-            textNoPenjualan.setText(Integer.toString(id));
-        }else{
-            textNoPenjualan.setText("1");
+        try {
+            String sql = "select id from penjualan order by id desc limit 1 ";
+            pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                int id = Integer.parseInt(rs.getString(1)) + 1;
+                textNoPenjualan.setText(Integer.toString(id));
+            }else{
+                textNoPenjualan.setText("1");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PenjualanView.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
 
     private void bersih() {
-        
+       textNoPenjualan.setEnabled(false);
+       textIDPelanggan.setText("");
+       textIDPelanggan.setText("");
+       textNamaPelanggan.setText("");
+       textIDBarang.setText("");
+       textNamaBarang.setText("");
+       textHarga.setText("");
+       textStok.setText("");
+       textQty.setText("");
+       textTanggal.setText("");
+       labelTotal.setText("Rp.0");
     }
 }
