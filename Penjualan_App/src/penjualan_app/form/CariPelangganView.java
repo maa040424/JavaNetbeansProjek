@@ -4,31 +4,19 @@
  */
 package penjualan_app.form;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
-import penjualan_app.setting.Koneksi;
-
 /**
  *
  * @author ASUS
  */
-public class CariBarangView extends javax.swing.JFrame {
+public class CariPelangganView extends javax.swing.JFrame {
 
     /**
-     * Creates new form CariBarangView
+     * Creates new form CariPelangganView
      */
-    public CariBarangView() {
+    public CariPelangganView() {
         initComponents();
-        tampilData();
     }
 
-    Connection conn = Koneksi.getKoneksi();
-    PreparedStatement pst;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,15 +34,14 @@ public class CariBarangView extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel1.setText("FORM CARI BARANG");
+        jLabel1.setText("FORM CARI PELANGGAN");
 
-        jLabel5.setText("Cari Nama Berdasarkan Barang");
+        jLabel5.setText("Cari Nama Berdasarkan Nama Pelanggan");
 
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -86,17 +73,17 @@ public class CariBarangView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(194, 194, 194)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(161, 161, 161))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,20 +143,20 @@ public class CariBarangView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CariBarangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CariPelangganView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CariBarangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CariPelangganView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CariBarangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CariPelangganView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CariBarangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CariPelangganView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CariBarangView().setVisible(true);
+                new CariPelangganView().setVisible(true);
             }
         });
     }
@@ -182,44 +169,4 @@ public class CariBarangView extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
-    
-     private void tampilData() {   
-    try {
-        String[] judul = {"ID","Nama Barang", "Kategori","Harga", "Stok"};
-        DefaultTableModel dtm = new DefaultTableModel(null, judul);
-        jTable1.setModel(dtm);
-
-        String sql = "SELECT * FROM barang";
-        
-        // Periksa jika ada teks di jTextField3 untuk filter pencarian berdasarkan nama barang
-        if (!jTextField3.getText().isEmpty()) {
-            sql = "SELECT * FROM barang WHERE nama_barang LIKE ?";
-        }
-
-        // Eksekusi query
-        pst = conn.prepareStatement(sql);
-        
-        // Jika ada filter pencarian, tambahkan parameter
-        if (!jTextField3.getText().isEmpty()) {
-            pst.setString(1, "%" + jTextField3.getText() + "%");
-        }
-
-        ResultSet rs = pst.executeQuery();
-
-        // Menampilkan data ke tabel
-        while (rs.next()) {
-            String[] data = {
-                rs.getString("id"),  // Nama Barang
-                rs.getString("nama_barang"),  // Nama Barang
-                rs.getString("kategori"),  // Kategori
-                rs.getString("harga"),  // Harga
-                rs.getString("stok")    // Stok
-            };
-            dtm.addRow(data);
-        }
-        
-    } catch (SQLException ex) {
-        Logger.getLogger(BarangView.class.getName()).log(Level.SEVERE, null, ex);
-    }
-}
 }
