@@ -131,14 +131,11 @@ public class CariBarangView extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int row = jTable1.getSelectedRow();
-        id = jTable1.getValueAt(row, 0).toString();
-        jTextField1.setText(jTable1.getValueAt(row, 1).toString());
-        jTextField2.setText(jTable1.getValueAt(row, 2).toString());
-        jTextFieldHarga.setText(jTable1.getValueAt(row, 3).toString());
-        jTextFieldStok.setText(jTable1.getValueAt(row, 4).toString());
-        jButton1.setEnabled(false);
-        jButton2.setEnabled(true);
-        jButton3.setEnabled(true);
+        PenjualanView.textIDBarang.setText (jTable1.getValueAt(row, 0).toString());
+        PenjualanView.textNamaBarang.setText (jTable1.getValueAt(row, 1).toString());
+        PenjualanView.textHarga.setText (jTable1.getValueAt(row, 3).toString());
+        PenjualanView.textStok.setText (jTable1.getValueAt(row, 4).toString());
+        
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**
