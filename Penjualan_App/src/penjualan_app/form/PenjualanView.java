@@ -46,7 +46,7 @@ public class PenjualanView extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         textStok = new javax.swing.JTextField();
         textQty = new javax.swing.JTextField();
-        jButtonTambah = new javax.swing.JButton();
+        btnTambah = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelBarang = new javax.swing.JTable();
@@ -139,7 +139,7 @@ public class PenjualanView extends javax.swing.JFrame {
 
         jLabel10.setText("Jumlah Beli");
 
-        jButtonTambah.setText("Tambah");
+        btnTambah.setText("Tambah");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -170,7 +170,7 @@ public class PenjualanView extends javax.swing.JFrame {
                             .addComponent(textStok)
                             .addComponent(textQty)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -194,7 +194,7 @@ public class PenjualanView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(textHarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonTambah))
+                    .addComponent(btnTambah))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -325,7 +325,7 @@ public class PenjualanView extends javax.swing.JFrame {
     private javax.swing.JButton btnCariBarang;
     private javax.swing.JButton btnCariPelanggan;
     private javax.swing.JButton btnSimpan;
-    private javax.swing.JButton jButtonTambah;
+    private javax.swing.JButton btnTambah;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -343,14 +343,14 @@ public class PenjualanView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelTotal;
     private javax.swing.JTable tabelBarang;
-    private javax.swing.JTextField textHarga;
-    private javax.swing.JTextField textIDBarang;
-    private javax.swing.JTextField textIDPelanggan;
-    private javax.swing.JTextField textNamaBarang;
-    private javax.swing.JTextField textNamaPelanggan;
+    public static javax.swing.JTextField textHarga;
+    public static javax.swing.JTextField textIDBarang;
+    public static javax.swing.JTextField textIDPelanggan;
+    public static javax.swing.JTextField textNamaBarang;
+    public static javax.swing.JTextField textNamaPelanggan;
     private javax.swing.JTextField textNoPenjualan;
     private javax.swing.JTextField textQty;
-    private javax.swing.JTextField textStok;
+    public static javax.swing.JTextField textStok;
     private javax.swing.JTextField textTanggal;
     // End of variables declaration//GEN-END:variables
 }

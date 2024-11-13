@@ -167,8 +167,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textIDPelanggan">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="textNamaPelanggan">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btnCariPelanggan">
           <Properties>
@@ -228,7 +234,7 @@
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="jButtonTambah" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="btnTambah" min="-2" pref="120" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -258,7 +264,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="textHarga" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonTambah" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnTambah" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="38" max="32767" attributes="0"/>
               </Group>
@@ -282,10 +288,19 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textIDBarang">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="textNamaBarang">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="textHarga">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btnCariBarang">
           <Properties>
@@ -303,10 +318,13 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textStok">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="textQty">
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonTambah">
+        <Component class="javax.swing.JButton" name="btnTambah">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tambah"/>
           </Properties>
